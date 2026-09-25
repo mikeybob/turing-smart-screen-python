@@ -1,0 +1,46 @@
+---
+display:
+  DISPLAY_SIZE: 3.5"
+  DISPLAY_ORIENTATION: landscape
+  DISPLAY_RGB_LED: 16, 223, 239
+
+static_images:
+  BACKGROUND:
+    PATH: background.png
+    X: 0
+    Y: 0
+    WIDTH: 480
+    HEIGHT: 320
+
+STATS:
+  DATE:
+    # For time display, it is recommended not to change the interval: keep to 1
+    INTERVAL: 1
+    DAY: # Format (Y/M/D ordering, month/day translations...) will match your computer locale
+      TEXT:
+        FORMAT: full # short (2/20/23) / medium (Feb 20, 2023) / long (February 20, 2023) / full (Monday, February 20, 2023)
+        SHOW: True
+        X: 10
+        Y: 220
+        WIDTH: 460
+        HEIGHT: 48
+        ANCHOR: mm
+        FONT: roboto/Roboto-Regular.ttf
+        FONT_SIZE: 26
+        FONT_COLOR: 186, 214, 230
+        BACKGROUND_IMAGE: background.png
+        ALIGN: center
+    HOUR: # Format (12/24h, timezone translations) will match your computer locale
+      TEXT:
+        FORMAT: HH:mm:ss # short (6:48 PM) / medium (6:48:53 PM) / long (6:48:53 PM UTC) / full / custom pattern e.g. "HH:mm:ss"
+        SHOW: True
+        X: 10
+        Y: 64
+        WIDTH: 460
+        HEIGHT: 124
+        ANCHOR: mm
+        FONT: digital/DIGITAL-7.TTF
+        FONT_SIZE: 120
+        FONT_COLOR: 16, 223, 239
+        BACKGROUND_IMAGE: background.png
+        ALIGN: center
