@@ -1,0 +1,50 @@
+---
+# Date and time only, for a 3.5" panel in landscape (480x320).
+# Other stats stay off via res/themes/default.yaml (interval 0, SHOW false).
+display:
+  DISPLAY_SIZE: 3.5"
+  DISPLAY_ORIENTATION: landscape
+  DISPLAY_RGB_LED: 16, 223, 239
+
+static_images:
+  BACKGROUND:
+    PATH: background.png
+    X: 0
+    Y: 0
+    WIDTH: 480
+    HEIGHT: 320
+
+STATS:
+  DATE:
+    # Keep at 1 so the clock stays in step with the minute.
+    INTERVAL: 1
+    DAY:
+      TEXT:
+        # full includes the weekday and follows the computer locale.
+        FORMAT: full
+        SHOW: True
+        X: 16
+        Y: 72
+        WIDTH: 448
+        HEIGHT: 48
+        FONT: roboto/Roboto-Bold.ttf
+        FONT_SIZE: 26
+        FONT_COLOR: 128, 255, 255
+        BACKGROUND_IMAGE: background.png
+        ALIGN: center
+        ANCHOR: mm
+    HOUR:
+      TEXT:
+        # short follows the locale 12/24h clock. Fixed box avoids clipped updates.
+        FORMAT: short
+        SHOW: True
+        X: 16
+        Y: 132
+        WIDTH: 448
+        HEIGHT: 124
+        FONT: roboto/Roboto-Bold.ttf
+        FONT_SIZE: 96
+        FONT_COLOR: 255, 255, 255
+        BACKGROUND_IMAGE: background.png
+        ALIGN: center
+        ANCHOR: mm
