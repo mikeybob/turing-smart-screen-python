@@ -1,0 +1,27 @@
+# One job per 3.5" revision A panel. launch_screens.py starts a process
+# only when that panel's COM port exists. Leave com_port empty until the
+# USB cable is plugged in, then set the /dev/ttyACM* path. Do not use AUTO
+# once more than one UsbMonitor is connected: auto-detect returns the first
+# USB35INCHIPSV2 port.
+#
+# The panel on this machine is /dev/ttyACM2 (UsbMonitor, serial USB35INCHIPSV2).
+# /dev/ttyACM0 and /dev/ttyACM1 are other devices.
+
+screens:
+  - name: stats
+    kind: monitor
+    com_port: /dev/ttyACM2
+    theme: LandscapeMagicBlue
+  - name: calendar
+    kind: calendar
+    com_port: ""
+    theme: ""
+  - name: services
+    kind: services
+    com_port: ""
+    theme: ""
+    targets:
+      - name: Google DNS
+        host: 8.8.8.8
+      - name: Cloudflare
+        host: 1.1.1.1

@@ -38,7 +38,22 @@ def load_yaml(configfile):
 PATH = sys.path[0]
 MAIN_DIRECTORY = Path(__file__).parent.parent.resolve()
 FONTS_DIR = str(MAIN_DIRECTORY / "res" / "fonts") + "/"
-CONFIG_DATA = load_yaml(MAIN_DIRECTORY / "config.yaml")
+
+
+def config_file_path() -> Path:
+    """Path of the YAML config for this process.
+
+    TSS_CONFIG lets launch_screens.py run one process per panel without
+    sharing the single config.yaml. Unset, behavior matches a direct
+    `python main.py` run.
+    """
+    override = os.environ.get("TSS_CONFIG", "").strip()
+    if override:
+        return Path(override).expanduser().resolve()
+    return MAIN_DIRECTORY / "config.yaml"
+
+
+CONFIG_DATA = load_yaml(config_file_path())
 THEME_DEFAULT = load_yaml(MAIN_DIRECTORY / "res/themes/default.yaml")
 THEME_DATA = None
 
