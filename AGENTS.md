@@ -58,4 +58,12 @@
 - Low-level API example: `simple-program.py`
 - Executable build spec: `turing-system-monitor.spec`
 
+## Cursor Cloud specific instructions
+- System Python is 3.12. Install `python3-tk`, `libusb-1.0-0`, `gir1.2-gtk-3.0`, and `gir1.2-ayatanaappindicator3-0.1` before the GUI tools. `tkinter` is required by `configure.py` and `theme-editor.py`. The GTK and Ayatana AppIndicator typelibs are required for `pystray` (the tray). Without the Gtk typelib, `import pystray` raises `ValueError` instead of falling through to another backend.
+- Install Python packages with `python3 -m pip install --user -r requirements.txt`. A root `pip install` fails on Debian's `PyYAML` (`RECORD file not found`). `~/.local/bin` is not on the default `PATH`; `flake8` and `pyinstaller` are symlinked into `/usr/local/bin`. Lint the same way CI does: `python3 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics`.
+- This VM has no USB display. Set `display.REVISION` to `SIMU` in `config.yaml`, then run `python3 main.py`. Do not commit `config.yaml` (CI rejects that diff). Output is `screencap.png`. `LcdSimulated` also serves a live preview at `http://localhost:5678`.
+- `ping3` needs a raw ICMP socket. Without `CAP_NET_RAW` the ping stat stays blank; CPU, memory, disk, and network still render. Missing CPU temperature and GPU sensors log warnings on this VM.
+- Unit tests, from the repo root: `python3 -m unittest discover -s tests -t .`. The `-t .` flag is required so `tests/library` does not shadow the application `library` package. Revision C image tests currently fail with `AttributeError: 'MockedLcdCommRevC' object has no attribute 'sub_revision'`. Color tests and revisions A, B, and D pass.
+- `theme-editor.py <theme-name>` always uses simulated LCD and static sensors. It binds port 5678, so stop `main.py` before starting it. `configure.py` writes `config.yaml` only when Save is clicked.
+
 
